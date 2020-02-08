@@ -68,4 +68,4 @@ print("Optimal parameter: ", model.best_estimator_)
 # Evaluating in optimal parameter
 y_pred = model.predict(X_test)
 from sklearn.metrics import accuracy_score
-print('Final accuracy: ', accuracy_score(y_test, y_pred))
+print('Final accuracy: ', accuracy_score(y_test, y_pred)) # 0.8530713267831695
