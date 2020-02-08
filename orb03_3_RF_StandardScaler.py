@@ -41,6 +41,11 @@ scaler.fit(X_train)
 X_train_scaled = scaler.transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
+import matplotlib.pyplot as plt
+plt.hist(X_train_scaled)
+plt.title('StandardScaler')
+plt.show()
+
 # 모델링 / 훈련
 forest = RandomForestClassifier(n_estimators=100, n_jobs=-1)
 forest.fit(X_train_scaled, y_train)

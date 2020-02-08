@@ -1,6 +1,6 @@
 # 패키지 임포트
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
 
 # 데이터 불러오기
 train = pd.read_csv('../Data/orb_data/train.csv', index_col=0)
@@ -32,17 +32,31 @@ feat_labels = train_x.columns[:]
 from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(train_x, train_y, test_size=0.2)
 
+print(X_train.shape) # (159992, 21)
+print(y_train.shape) # (159992,)
+
+from sklearn.preprocessing import RobustScaler
+scaler = RobustScaler()
+scaler.fit(X_train)
+X_train_scaled = scaler.transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+import matplotlib.pyplot as plt
+plt.hist(X_train_scaled)
+plt.title('RobustScaler')
+plt.show()
+
 # 모델링 / 훈련
-GBC = GradientBoostingClassifier(n_estimators=100, n_iter_no_change=)
-GBC.fit(X_train, y_train)
+forest = RandomForestClassifier(n_estimators=100, n_jobs=-1)
+forest.fit(X_train_scaled, y_train)
 
 # 정확도 측정
-acc = GBC.score(X_test, y_test)
-print('acc: ', acc) # 계산이 느림
+acc = forest.score(X_test_scaled, y_test)
+print('acc: ', acc) # 0.8794219855496388
 
 # 예측
-y_pred = GBC.predict_proba(test_x)
-print(y_pred)
+y_pred = forest.predict_proba(test_x)
+# print(y_pred)
 
 # 특성 중요도 그리기
 import matplotlib.pyplot as plt
@@ -50,16 +64,15 @@ import numpy as np
 
 def plot_feature_importances_orb(model):
     n_features = train_x.shape[1]
-    plt.barh(np.arange(n_features), GBC.feature_importances_, align='center')
+    plt.barh(np.arange(n_features), forest.feature_importances_, align='center')
     plt.yticks(np.arange(n_features), feat_labels)
     plt.xlabel("feature importance")
     plt.ylabel("feature")
     plt.ylim(-1, n_features)
     
-plot_feature_importances_orb(GBC)
+plot_feature_importances_orb(forest)
 plt.show()
 
 # # 제출 파일 생성
 # submission = pd.DataFrame(data=y_pred, columns=sample_submission.columns, index=sample_submission.index)
 # submission.to_csv('submission.csv', index=True)
-
