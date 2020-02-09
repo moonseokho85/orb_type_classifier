@@ -33,7 +33,7 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(train_x, train_y, test_size=0.2)
 
 # 모델링 / 훈련
-GBC = GradientBoostingClassifier(n_estimators=100, n_iter_no_change=)
+GBC = GradientBoostingClassifier(n_estimators=100)
 GBC.fit(X_train, y_train)
 
 # 정확도 측정
