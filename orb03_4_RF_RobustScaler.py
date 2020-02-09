@@ -35,6 +35,7 @@ X_train, X_test, y_train, y_test = train_test_split(train_x, train_y, test_size=
 print(X_train.shape) # (159992, 21)
 print(y_train.shape) # (159992,)
 
+# RobustScaler로 이상치 제거하기
 from sklearn.preprocessing import RobustScaler
 scaler = RobustScaler()
 scaler.fit(X_train)

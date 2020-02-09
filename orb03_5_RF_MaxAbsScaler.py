@@ -35,19 +35,16 @@ X_train, X_test, y_train, y_test = train_test_split(train_x, train_y, test_size=
 print(X_train.shape) # (159992, 21)
 print(y_train.shape) # (159992,)
 
-X_train = X_train.between(0, 100)
-print(X_train)
-
-from sklearn.preprocessing import StandardScaler
-scaler = StandardScaler()
+# MaxAbsScaler로 이상치 제거하기
+from sklearn.preprocessing import MaxAbsScaler
+scaler = MaxAbsScaler()
 scaler.fit(X_train)
 X_train_scaled = scaler.transform(X_train)
 X_test_scaled = scaler.transform(X_test)
-print(X_train_scaled)
 
 import matplotlib.pyplot as plt
 plt.hist(X_train_scaled)
-plt.title('StandardScaler')
+plt.title('MaxAbsScaler')
 plt.show()
 
 # 모델링 / 훈련
@@ -56,7 +53,7 @@ forest.fit(X_train_scaled, y_train)
 
 # 정확도 측정
 acc = forest.score(X_test_scaled, y_test)
-print('acc: ', acc) # 0.8803970099252482
+print('acc: ', acc) # 0.8700967524188105
 
 # 예측
 y_pred = forest.predict_proba(test_x)

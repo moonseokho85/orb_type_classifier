@@ -22,3 +22,22 @@ test_x = test
 
 print(type(train_x))
 print("Shape of orb data: ", train_x.shape)
+
+print(train_x.columns)
+'''
+Index(['fiberID', 'psfMag_u', 'psfMag_g', 'psfMag_r', 'psfMag_i', 'psfMag_z', 'fiberMag_u', 'fiberMag_g', 'fiberMag_r', 'fiberMag_i', 'fiberMag_z', 'petroMag_u', 'petroMag_g', 'petroMag_r', 'petroMag_i', 'petroMag_z', 'modelMag_u', 'modelMag_g', 'modelMag_r', 'modelMag_i', 'modelMag_z'], dtype='object')
+'''
+
+X_psfMag_u = train_x['psfMag_u']
+print(X_psfMag_u)
+print(X_psfMag_u.shape)
+
+import numpy as np
+X_psfMag_u = np.reshape(X_psfMag_u, (-1, 1))
+print(X_psfMag_u.shape)
+
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+scaler.fit(X_psfMag_u)
+X_psfMag_u_scaled = scaler.transform(X_psfMag_u)
+print(X_psfMag_u_scaled)
