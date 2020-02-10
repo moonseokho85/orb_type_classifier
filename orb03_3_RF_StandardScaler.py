@@ -40,6 +40,7 @@ scaler = StandardScaler()
 scaler.fit(X_train)
 X_train_scaled = scaler.transform(X_train)
 X_test_scaled = scaler.transform(X_test)
+test_x_scaled = scaler.transform(test_x)
 print(X_train_scaled)
 
 import matplotlib.pyplot as plt
@@ -56,7 +57,7 @@ acc = forest.score(X_test_scaled, y_test)
 print('acc: ', acc) # 0.8803970099252482
 
 # 예측
-y_pred = forest.predict_proba(test_x)
+y_pred = forest.predict_proba(test_x_scaled)
 # print(y_pred)
 
 # 특성 중요도 그리기
@@ -75,5 +76,5 @@ plot_feature_importances_orb(forest)
 plt.show()
 
 # 제출 파일 생성
-submission = pd.DataFrame(data=y_pred, columns=sample_submission.columns, index=sample_submission.index)
-submission.to_csv('submission.csv', index=True)
+# submission = pd.DataFrame(data=y_pred, columns=sample_submission.columns, index=sample_submission.index)
+# submission.to_csv('submission.csv', index=True)
