@@ -63,7 +63,7 @@ plt.show()
 
 # 정확도 측정
 acc = LGBM.score(X_test, y_test)
-print('acc: ', acc) # 0.8589964749118728
+print('acc: ', acc) # 0.8454961374034351
 
 # 예측
 y_pred = LGBM.predict_proba(test_x)
@@ -83,6 +83,7 @@ def plot_feature_importances_orb(model):
     
 plot_feature_importances_orb(LGBM)
 plt.show()
+
 '''
 # 제출 파일 생성
 submission = pd.DataFrame(data=y_pred, columns=sample_submission.columns, index=sample_submission.index)

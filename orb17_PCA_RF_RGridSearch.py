@@ -73,7 +73,7 @@ RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
                        n_jobs=None, oob_score=False, random_state=None,
                        verbose=0, warm_start=False)
 '''
-# Evaluating in optimal parameter
+# 최적의 파라미터로 예측하기
 y_pred = model.predict(X_test)
 from sklearn.metrics import accuracy_score
 print('Final accuracy: ', accuracy_score(y_test, y_pred)) # 0.8530713267831695
