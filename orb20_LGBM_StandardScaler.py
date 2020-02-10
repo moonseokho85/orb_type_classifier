@@ -31,17 +31,31 @@ feat_labels = train_x.columns[:]
 
 # 훈련 데이터와 테스트 데이터로 나누기
 from sklearn.model_selection import train_test_split
-X_train, X_test, y_train, y_test = train_test_split(train_x, train_y, test_size=0.2)
+X_train, X_test, y_train, y_test = train_test_split(train_x, train_y, test_size=0.2, random_state=0)
 
 # 모델링 / 훈련
 from lightgbm import LGBMClassifier
-LGBM = LGBMClassifier(n_estimators=400, n_jobs=-1)
-evals = [(X_test, y_test)]
-LGBM.fit(X_train, y_train, early_stopping_rounds=100, eval_metric='logloss', eval_set=evals, verbose=True)
+LGBM = LGBMClassifier()
+LGBM.fit(X_train, y_train, verbose=True)
+
+# 정규화
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+scaler.fit(X_train)
+X_train_scaled = scaler.transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+test_x_scaled = scaler.transform(test_x)
+print(X_train_scaled)
+
+# 시각화
+import matplotlib.pyplot as plt
+plt.hist(X_train_scaled)
+plt.title('StandardScaler')
+plt.show()
 
 # 정확도 측정
 acc = LGBM.score(X_test, y_test)
-print('acc: ', acc) # 0.8574714367859196
+print('acc: ', acc) # 0.8454961374034351
 
 # 예측
 y_pred = LGBM.predict_proba(test_x)
