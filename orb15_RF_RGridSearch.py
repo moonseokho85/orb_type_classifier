@@ -34,9 +34,11 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(train_x, train_y, test_size=0.2)
 
 # Parameter
-parameters = [
-    {"n_estimators": [1, 10, 100, 1000]}
-]
+param_grid = {
+    'n_estimators': [400, 700, 1000],
+    'max_depth': [15,20,25],
+    'max_leaf_nodes': [50, 100, 200]
+}
 
 # K-Fold
 from sklearn.model_selection import KFold
@@ -45,7 +47,7 @@ kfold_cv = KFold(n_splits=5, shuffle=True)
 # GridSearch
 from sklearn.model_selection import GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
-model = GridSearchCV(RandomForestClassifier(), parameters, cv=kfold_cv, n_jobs=-1)
+model = GridSearchCV(RandomForestClassifier(), param_grid, cv=kfold_cv, n_jobs=-1)
 model.fit(X_train, y_train)
 print("Optimal parameter: ", model.best_estimator_)
 
