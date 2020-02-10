@@ -42,6 +42,10 @@ X_train_scaled = scaler.transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 print(X_train_scaled)
 
+X_train_scaled = scaler.transform(X_train_scaled)
+X_test_scaled = scaler.transform(X_test_scaled)
+print(X_train_scaled)
+
 import matplotlib.pyplot as plt
 plt.hist(X_train_scaled)
 plt.title('StandardScaler')
@@ -53,7 +57,7 @@ forest.fit(X_train_scaled, y_train)
 
 # 정확도 측정
 acc = forest.score(X_test_scaled, y_test)
-print('acc: ', acc) # 0.8803970099252482
+print('acc: ', acc) # 0.874796869921748
 
 # 예측
 y_pred = forest.predict_proba(test_x)
@@ -74,6 +78,6 @@ def plot_feature_importances_orb(model):
 plot_feature_importances_orb(forest)
 plt.show()
 
-# 제출 파일 생성
-submission = pd.DataFrame(data=y_pred, columns=sample_submission.columns, index=sample_submission.index)
-submission.to_csv('submission.csv', index=True)
+# # 제출 파일 생성
+# submission = pd.DataFrame(data=y_pred, columns=sample_submission.columns, index=sample_submission.index)
+# submission.to_csv('submission.csv', index=True)
