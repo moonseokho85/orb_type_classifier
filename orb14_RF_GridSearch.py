@@ -3,9 +3,9 @@ import pandas as pd
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 
 # 데이터 불러오기
-train = pd.read_csv('./data/train.csv', index_col=0)
-test = pd.read_csv('./data/test.csv', index_col=0)
-sample_submission = pd.read_csv('./data/sample_submission.csv', index_col=0)
+train = pd.read_csv('../Data/orb_data/train.csv', index_col=0)
+test = pd.read_csv('../Data/orb_data/test.csv', index_col=0)
+sample_submission = pd.read_csv('../Data/orb_data/sample_submission.csv', index_col=0)
 
 # Train 데이터의 타입을 Sample_submission에 대응하는 가변수 형태로 변환
 column_number = {}
