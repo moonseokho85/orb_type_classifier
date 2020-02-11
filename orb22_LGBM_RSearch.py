@@ -56,11 +56,19 @@ from lightgbm import LGBMClassifier
 model = RandomizedSearchCV(LGBMClassifier(), param_grid, cv=kfold_cv, n_jobs=-1)
 model.fit(X_train, y_train)
 print("Optimal parameter: ", model.best_estimator_)
+'''
+Optimal parameter:  LGBMClassifier(boosting_type='gbdt', class_weight=None, colsample_bytree=0.8,
+        importance_type='split', learning_rate=0.1, max_depth=20,
+        min_child_samples=20, min_child_weight=0.001, min_split_gain=0.3,
+        n_estimators=1000, n_jobs=-1, num_leaves=100, objective=None,
+        random_state=None, reg_alpha=1.1, reg_lambda=1.2, silent=True,
+        subsample=0.9, subsample_for_bin=200000, subsample_freq=20)
+'''
 
 # Evaluating in optimal parameter
 y_pred = model.predict(X_test)
 from sklearn.metrics import accuracy_score
-print('Final accuracy: ', accuracy_score(y_test, y_pred))
+print('Final accuracy: ', accuracy_score(y_test, y_pred)) # Final accuracy:  0.8745218630465762
 
 '''
 # # 제출 파일 생성

@@ -50,11 +50,20 @@ from sklearn.ensemble import RandomForestClassifier
 model = GridSearchCV(RandomForestClassifier(), param_grid, cv=kfold_cv, n_jobs=-1)
 model.fit(X_train, y_train)
 print("Optimal parameter: ", model.best_estimator_)
+'''
+Optimal parameter:  RandomForestClassifier(bootstrap=True, class_weight=None, criterion='gini',
+            max_depth=25, max_features='auto', max_leaf_nodes=200,
+            min_impurity_decrease=0.0, min_impurity_split=None,
+            min_samples_leaf=1, min_samples_split=2,
+            min_weight_fraction_leaf=0.0, n_estimators=400, n_jobs=None,
+            oob_score=False, random_state=None, verbose=0,
+            warm_start=False)
+'''
 
 # Evaluating in optimal parameter
 y_pred = model.predict(X_test)
 from sklearn.metrics import accuracy_score
-print('Final accuracy: ', accuracy_score(y_test, y_pred))
+print('Final accuracy: ', accuracy_score(y_test, y_pred)) # Final accuracy:  0.8476961924048101
 
 '''
 # # 제출 파일 생성
