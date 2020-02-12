@@ -66,7 +66,7 @@ Optimal parameter:  LGBMClassifier(boosting_type='gbdt', class_weight=None, cols
 '''
 
 # Evaluating in optimal parameter
-y_pred = model.predict(X_test)
+y_pred = model.predict(test_x)
 from sklearn.metrics import accuracy_score
 print('Final accuracy: ', accuracy_score(y_test, y_pred)) # Final accuracy:  0.8745218630465762
 
